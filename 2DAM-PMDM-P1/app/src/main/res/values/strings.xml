@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Kotlin-Proyecto1</string>
+    <string name="registrar">Registrarse</string>
+    <string name="editTextEmail">Introduza el email</string>
+    <string name="editTextNombre">Introduza el nombre</string>
+    <string name="editTextApellidos">Introduza los apellidos</string>
+    <string name="editTextContrasena">Introduza la contraseña</string>
+    <string name="editTextRepetir">Por favor, introduce de nuevo la contraseña</string>
+    <string name="email">Email: </string>
+    <string name="nombre">Nombre: </string>
+    <string name="apellidos">Apellidos: </string>
+    <string name="contrasena">Contraseña: </string>
+    <string name="repetirContrasena">Repetir contraseña: </string>
+    <string name="tengoCuenta">¿Ya tienes cuenta?</string>
+    <string name="botonRegistrar">Registrar</string>
+    <string name="inicioSesion">Inicio Sesión</string>
+    <string name="botonIniciarSesion">Iniciar sesión</string>
+    <string name="olvidarContrasena">¿Has olvidado la contraseña?</string>
+    <string name="botonIrANotas">Escribe tu día …</string>
+    <string name="botonIrACalendario">Botón para ir a el apartado calendario</string>
+    <string name="botonIrAAjustes">Botón para ir a ajustes</string>
+    <string name="botonIrAEstadistica">Botón para ir a la pantalla de estadística</string>
+    <string name="botonIrAPrincipal">Botón para ir a la pantalla principal</string>
+    <string name="botonVolver">Botón para volver</string>
+    <string name="botonCerrarSesion">Botón para cerrar sesión</string>
+    <string name="temas">Temas:</string>
+
 </resources>
