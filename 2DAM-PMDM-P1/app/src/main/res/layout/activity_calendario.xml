@@ -12,6 +12,7 @@
         android:id="@+id/TextView"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:contentDescription="@string/fotoCalendario"
         android:src="@drawable/Calendario"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,10 +34,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tracker"
-        android:textSize="50dp"
-        android:textColor="@color/blanco"
-        android:fontFamily="@font/fuenteTitulo"
+        android:text="@string/contador"
+        android:textSize="50sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/fuente_titulo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,26 +59,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=":("
-                android:textSize="50dp"
+                android:text="@string/caraTriste"
+                android:textSize="50sp"
                 android:textColor="#ff0000"
-                android:fontFamily="@font/fuenteTitulo"
+                android:fontFamily="@font/fuente_titulo"
                 android:padding="20dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=":/"
-                android:textSize="50dp"
-                android:textColor="#ffff00"
-                android:fontFamily="@font/fuenteTitulo"
+                android:text="@string/caraRegular"
+                android:textSize="50sp"
+                android:textColor="#FF8A00"
+                android:fontFamily="@font/fuente_titulo"
                 android:padding="20dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=":)"
-                android:textSize="50dp"
+                android:text="@string/caraFeliz"
+                android:textSize="50sp"
                 android:textColor="#00ff00"
-                android:fontFamily="@font/fuenteTitulo"
+                android:fontFamily="@font/fuente_titulo"
                 android:padding="20dp" />
         </TableRow>
 
@@ -86,26 +87,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="50dp"
+                android:text="@string/contar"
+                android:textSize="50sp"
                 android:textColor="#ff0000"
-                android:fontFamily="@font/fuenteTitulo"
+                android:fontFamily="@font/fuente_titulo"
                 android:padding="20dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="50dp"
-                android:textColor="#ffff00"
-                android:fontFamily="@font/fuenteTitulo"
+                android:text="@string/contar"
+                android:textSize="50sp"
+                android:textColor="#FF8A00"
+                android:fontFamily="@font/fuente_titulo"
                 android:padding="20dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="50dp"
+                android:text="@string/contar"
+                android:textSize="50sp"
                 android:textColor="#00ff00"
-                android:fontFamily="@font/fuenteTitulo"
+                android:fontFamily="@font/fuente_titulo"
                 android:padding="20dp" />
         </TableRow>
     </TableLayout>
@@ -114,12 +115,12 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@android:color/transparent"
-        android:hint="DD / MM / YYYY"
-        android:textColorHint="@color/blanco"
+        android:hint="@string/botonDias"
+        android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95"></Button>
+        app:layout_constraintVertical_bias="0.95"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
