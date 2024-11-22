@@ -19,7 +19,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.05"
-        app:layout_constraintHorizontal_bias="0.50"/>
+        app:layout_constraintHorizontal_bias="0.5"/>
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/grey"
+        android:hint="@string/botonDias"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"/>
 
     <CalendarView
         android:layout_width="match_parent"
@@ -29,98 +41,48 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/contador"
-        android:textSize="50sp"
-        android:textColor="@color/white"
-        android:fontFamily="@font/fuente_titulo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.65" />
 
-    <TableLayout
-        android:id="@+id/table_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/menuInferior"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/TextView"
-        app:layout_constraintVertical_bias="0.8">
+        android:gravity="center"
+        android:background="@color/secundario">
 
-        <TableRow
-            android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/caraTriste"
-                android:textSize="50sp"
-                android:textColor="#ff0000"
-                android:fontFamily="@font/fuente_titulo"
-                android:padding="20dp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/caraRegular"
-                android:textSize="50sp"
-                android:textColor="#FF8A00"
-                android:fontFamily="@font/fuente_titulo"
-                android:padding="20dp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/caraFeliz"
-                android:textSize="50sp"
-                android:textColor="#00ff00"
-                android:fontFamily="@font/fuente_titulo"
-                android:padding="20dp" />
-        </TableRow>
+        <ImageButton
+            android:id="@+id/botonEstadistica"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/botonIrAEstadistica"
+            android:src="@mipmap/estadistica"
+            android:backgroundTint="@color/secundario"
+            android:scaleType="centerInside" />
 
-        <TableRow
-            android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/contar"
-                android:textSize="50sp"
-                android:textColor="#ff0000"
-                android:fontFamily="@font/fuente_titulo"
-                android:padding="20dp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/contar"
-                android:textSize="50sp"
-                android:textColor="#FF8A00"
-                android:fontFamily="@font/fuente_titulo"
-                android:padding="20dp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/contar"
-                android:textSize="50sp"
-                android:textColor="#00ff00"
-                android:fontFamily="@font/fuente_titulo"
-                android:padding="20dp" />
-        </TableRow>
-    </TableLayout>
 
-    <Button
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/transparent"
-        android:hint="@string/botonDias"
-        android:textColorHint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95"/>
+        <ImageButton
+            android:id="@+id/botonPrincipal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/botonIrAPrincipal"
+            android:src="@mipmap/casa"
+            android:backgroundTint="@color/secundario"
+            android:scaleType="centerInside"/>
+
+        <ImageButton
+            android:id="@+id/botonVolver"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/botonVolver"
+            android:src="@mipmap/volver"
+            android:backgroundTint="@color/secundario"
+            android:scaleType="centerInside"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

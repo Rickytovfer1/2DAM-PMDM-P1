@@ -36,6 +36,10 @@
     <string name="fotoAjustes">Foto de ajustes</string>
     <string name="fotoNotas">Foto de notas</string>
     <string name="fondoNotas">Fondo de notas</string>
-
+    <string name="botonMalo">He tenido un mal dia</string>
+    <string name="botonMedio">He tenido un dia normal</string>
+    <string name="botonBueno">He tenido un gran dia</string>
+    <string name="botonGuardar">Guardar</string>
+    <string name="progreso">Progreso Mesual</string>
 
 </resources>
