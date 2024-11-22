@@ -24,5 +24,18 @@
     <string name="botonVolver">Botón para volver</string>
     <string name="botonCerrarSesion">Botón para cerrar sesión</string>
     <string name="temas">Temas:</string>
+    <string name="textNotas">Venga escribe que es bueno compartir recuerdos!</string>
+    <string name="tituloNotas">¿Cómo fue tu día?</string>
+    <string name="botonDias">DD / MM / YYYY</string>
+    <string name="contar">0</string>
+    <string name="caraFeliz">:)</string>
+    <string name="caraTriste">:(</string>
+    <string name="caraRegular">:/</string>
+    <string name="contador">Contador</string>
+    <string name="fotoCalendario">Foto de calendario</string>
+    <string name="fotoAjustes">Foto de ajustes</string>
+    <string name="fotoNotas">Foto de notas</string>
+    <string name="fondoNotas">Fondo de notas</string>
+
 
 </resources>
