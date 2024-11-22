@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@color/primario"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ContadorMain">
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/main"
+        app:layout_constraintEnd_toEndOf="@id/main"
+        app:layout_constraintStart_toStartOf="@id/main"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.3">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/fuente_titulo"
+            android:gravity="center"
+            android:text="@string/contador"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.65" />
+
+        <TableRow android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fuente_titulo"
+                android:padding="20dp"
+                android:text="@string/caraTriste"
+                android:textColor="#ff0000"
+                android:textSize="50sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fuente_titulo"
+                android:padding="20dp"
+                android:text="@string/caraRegular"
+                android:textColor="#FF8A00"
+                android:textSize="50sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fuente_titulo"
+                android:padding="20dp"
+                android:text="@string/caraFeliz"
+                android:textColor="#00ff00"
+                android:textSize="50sp" />
+        </TableRow>
+
+        <TableRow android:gravity="center">
+
+            <TextView
+                android:id="@+id/txtContadorMal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fuente_titulo"
+                android:padding="20dp"
+                android:text="@string/contar"
+                android:textColor="#ff0000"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/txtContadorRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fuente_titulo"
+                android:padding="20dp"
+                android:text="@string/contar"
+                android:textColor="#FF8A00"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/txtContadorBien"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fuente_titulo"
+                android:padding="20dp"
+                android:text="@string/contar"
+                android:textColor="#00ff00"
+                android:textSize="50sp" />
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fuente_titulo"
+        android:textColor="@color/white"
+        android:text="@string/progreso"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:progress="0"
+        android:max="100"
+        android:indeterminate="false"
+        style="?android:attr/progressBarStyleHorizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7"/>
+
+    <LinearLayout
+        android:id="@+id/menuInferior"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center"
+        android:background="@color/secundario">
+
+        <ImageButton
+            android:id="@+id/botonEstadistica"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/botonIrAEstadistica"
+            android:src="@mipmap/estadistica"
+            android:backgroundTint="@color/secundario"
+            android:scaleType="centerInside" />
+
+
+        <ImageButton
+            android:id="@+id/botonPrincipal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/botonIrAPrincipal"
+            android:src="@mipmap/casa"
+            android:backgroundTint="@color/secundario"
+            android:scaleType="centerInside"/>
+
+        <ImageButton
+            android:id="@+id/botonVolver"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/botonVolver"
+            android:src="@mipmap/volver"
+            android:backgroundTint="@color/secundario"
+            android:scaleType="centerInside"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
