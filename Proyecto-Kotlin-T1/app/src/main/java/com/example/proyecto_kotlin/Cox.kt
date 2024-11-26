@@ -46,6 +46,8 @@ class Cox
         }
     }
 
+
+    //  Select
     fun consulta(_Con: Connection, _sql: String, vararg _parametros: Any): ResultSet?
     {
         val _ps: PreparedStatement = _Con.prepareStatement(_sql);
@@ -88,6 +90,7 @@ class Cox
     }
 
 
+    // Update / Insert / Drop
     fun insertar(_Con: Connection, _sql: String, vararg _parametros: Any): Boolean
     {
         val _ps: PreparedStatement = _Con.prepareStatement(_sql);
@@ -124,6 +127,24 @@ class Cox
         catch (_e: Exception)
         {
             println("Petardazo");
+            false;
+        }
+    }
+
+
+    fun chapar(_Con: Connection): Boolean
+    {
+        if (_Con == null)
+            return false;
+
+        return try
+        {
+            _Con.close()
+            true;
+        }
+        catch (_e: Exception)
+        {
+            println("Error: ${_e.message}");
             false;
         }
     }
