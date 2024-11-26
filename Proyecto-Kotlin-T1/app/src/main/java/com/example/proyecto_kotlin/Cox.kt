@@ -1,6 +1,8 @@
 package com.example.proyecto_kotlin
 import java.sql.Connection
+import java.sql.Date
 import java.sql.DriverManager
+import java.sql.PreparedStatement
 import java.sql.SQLException
 
 class Cox
@@ -13,6 +15,16 @@ class Cox
 )
 {
     private var _url: String = "jdbc:postgresql://$_host:$_puerto/$_BD";
+    private var _debug: Boolean = false;
+
+    fun get_debug(): Boolean
+    {
+        return this._debug;
+    }
+    fun set_debug(_debug: Boolean)
+    {
+        this._debug = _debug;
+    }
 
     fun conectar(): Connection?
     {
@@ -31,7 +43,44 @@ class Cox
             println("Error al conectarse a la BD: ${_sqle.message}");
             null;
         }
+    }
 
+    fun consulta(_Con: Connection, _sql: String, vararg _parametros: Any)
+    {
+        val _ps: PreparedStatement = _Con.prepareStatement(_sql);
+
+        try
+        {
+            // Nota: Luego aprender ah hacer en un stream :)
+            for ((i, param) in _parametros.withIndex())
+            {
+                when(param)
+                {
+                    is Int ->       _ps.setInt(i+1, param);
+                    is String ->    _ps.setString(i+1, param);
+                    is Double ->    _ps.setDouble(i+1, param);
+                    is Float ->     _ps.setFloat(i+1, param);
+                    is Date ->      _ps.setDate(i+1, param);
+                    else -> throw IllegalArgumentException("Tipo no soportado por consulta; Tipo es: ${param::class}");
+                }
+            }
+
+            val _setResultados = _ps.executeQuery();
+
+            if (_debug)
+                println(_setResultados.toString())
+
+            _setResultados.close();
+            _ps.close();
+        }
+        catch(_sqle: SQLException)
+        {
+            println("Error en la consulta: ${_sqle.message}");
+        }
+        catch (_e: Exception)
+        {
+            println("Petardazo");
+        }
     }
 
 }
@@ -40,5 +89,47 @@ class Cox
 dependencies
 {
     implementation("org.postgresql:postgresql:42.2.20")
+}
+*/
+
+/*
+fun ejecutarConsulta(connection: Connection, sql: String, vararg parametros: Any) {
+    try {
+        val preparedStatement: PreparedStatement = connection.prepareStatement(sql)
+
+        // Asignar los valores de los parámetros varargs al PreparedStatement
+        for ((index, parametro) in parametros.withIndex()) {
+            when (parametro) {
+                is Int -> preparedStatement.setInt(index + 1, parametro)
+                is String -> preparedStatement.setString(index + 1, parametro)
+                is Double -> preparedStatement.setDouble(index + 1, parametro)
+                // Agrega más tipos según sea necesario
+                else -> throw IllegalArgumentException("Tipo de parámetro no soportado: ${parametro::class}")
+            }
+        }
+
+        val resultSet = preparedStatement.executeQuery()
+        while (resultSet.next()) {
+            println("ID: ${resultSet.getInt("id")}, Nombre: ${resultSet.getString("nombre")}")
+        }
+
+        resultSet.close()
+        preparedStatement.close()
+    } catch (e: SQLException) {
+        println("Error al ejecutar la consulta: ${e.message}")
+    }
+}
+
+fun main() {
+    val conexion = Conexion("localhost", "5432", "mi_base_de_datos", "mi_usuario", "mi_contraseña")
+    val connection = conexion.conectar()
+
+    if (connection != null) {
+        val sql = "SELECT * FROM usuarios WHERE id = ? AND nombre = ?"
+        ejecutarConsulta(connection, sql, 1, "Juan")
+        connection.close()
+    } else {
+        println("No se pudo conectar a la base de datos")
+    }
 }
 */
