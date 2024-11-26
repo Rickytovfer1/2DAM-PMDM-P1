@@ -3,6 +3,7 @@ import java.sql.Connection
 import java.sql.Date
 import java.sql.DriverManager
 import java.sql.PreparedStatement
+import java.sql.ResultSet
 import java.sql.SQLException
 
 class Cox
@@ -45,11 +46,11 @@ class Cox
         }
     }
 
-    fun consulta(_Con: Connection, _sql: String, vararg _parametros: Any)
+    fun consulta(_Con: Connection, _sql: String, vararg _parametros: Any): ResultSet?
     {
         val _ps: PreparedStatement = _Con.prepareStatement(_sql);
 
-        try
+        return try
         {
             // Nota: Luego aprender ah hacer en un stream :)
             for ((i, param) in _parametros.withIndex())
@@ -72,14 +73,58 @@ class Cox
 
             _setResultados.close();
             _ps.close();
+            _setResultados
         }
         catch(_sqle: SQLException)
         {
             println("Error en la consulta: ${_sqle.message}");
+            null;
         }
         catch (_e: Exception)
         {
             println("Petardazo");
+            null;
+        }
+    }
+
+
+    fun insertar(_Con: Connection, _sql: String, vararg _parametros: Any): Boolean
+    {
+        val _ps: PreparedStatement = _Con.prepareStatement(_sql);
+
+        return try
+        {
+            // Nota: Luego aprender ah hacer en un stream :)
+            for ((i, param) in _parametros.withIndex())
+            {
+                when(param)
+                {
+                    is Int ->       _ps.setInt(i+1, param);
+                    is String ->    _ps.setString(i+1, param);
+                    is Double ->    _ps.setDouble(i+1, param);
+                    is Float ->     _ps.setFloat(i+1, param);
+                    is Date ->      _ps.setDate(i+1, param);
+                    else -> throw IllegalArgumentException("Tipo no soportado por consulta; Tipo es: ${param::class}");
+                }
+            }
+
+            val columnas = _ps.executeUpdate()
+
+            if (_debug)
+                println(columnas)
+
+            _ps.close();
+            columnas > 0;
+        }
+        catch(_sqle: SQLException)
+        {
+            println("Error en la insercion: ${_sqle.message}");
+            false;
+        }
+        catch (_e: Exception)
+        {
+            println("Petardazo");
+            false;
         }
     }
 
