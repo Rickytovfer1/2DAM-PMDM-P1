@@ -4,6 +4,7 @@
     <option name="MigrateToGradleLocalJavaHome">
       <set>
         <option value="$PROJECT_DIR$/2DAM-PMDM-P1" />
+        <option value="$PROJECT_DIR$/Proyecto-Kotlin-T1" />
       </set>
     </option>
   </component>
