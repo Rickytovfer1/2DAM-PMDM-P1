@@ -95,18 +95,4 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Error al guardar el usuario", Toast.LENGTH_SHORT).show()
         }
     }
-
-    fun limpiarCampos(
-        inputNombre: EditText,
-        inputApellidos: EditText,
-        inputEmail: EditText,
-        inputContrasena: EditText,
-        checkNotificaciones: CheckBox
-    ) {
-        inputNombre.text.clear()
-        inputApellidos.text.clear()
-        inputEmail.text.clear()
-        inputContrasena.text.clear()
-        checkNotificaciones.isChecked = false
-    }
 }
