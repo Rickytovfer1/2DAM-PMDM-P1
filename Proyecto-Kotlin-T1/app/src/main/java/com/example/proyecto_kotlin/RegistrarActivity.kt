@@ -90,6 +90,11 @@ class RegistrarActivity : AppCompatActivity() {
 
         val id = usuarioRepositorio.insertarUsuario(usuario)
         if (id != -1L) {
+            val sharedPreferences = getSharedPreferences("idUsuario", MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putLong("id_usuario", id)
+            editor.apply()
+
             Toast.makeText(this, "Usuario guardado con éxito (ID: $id)", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, PrincipalActivity::class.java)
             startActivity(intent)

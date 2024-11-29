@@ -18,7 +18,7 @@ class NotaRepositorio(context: Context) {
             put("texto", nota.texto)
             put("estado", nota.estado)
             put("fecha_creacion", nota.fechaCreacion.toString())
-            put("id_usuario", nota.idUsuario.id)
+            put("id_usuario", nota.idUsuario)
 
         }
 

@@ -8,5 +8,5 @@ data class Nota (
     var texto: String,
     var estado: String,
     var fechaCreacion : LocalDate,
-    var idUsuario: Usuario
+    var idUsuario: Long
 )
