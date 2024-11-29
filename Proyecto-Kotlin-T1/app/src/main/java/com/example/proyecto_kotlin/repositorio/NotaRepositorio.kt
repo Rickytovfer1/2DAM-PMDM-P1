@@ -1,11 +1,10 @@
-package com.example.proyecto_kotlin.database
+package com.example.proyecto_kotlin.repositorio
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.example.proyecto_kotlin.BBDD.Sql
 import com.example.proyecto_kotlin.modelos.Nota
-import com.example.proyecto_kotlin.modelos.Usuario
 
 class NotaRepositorio(context: Context) {
 

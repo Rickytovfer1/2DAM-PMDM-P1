@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.proyecto_kotlin.database.UsuarioRepositorio
+import com.example.proyecto_kotlin.repositorio.UsuarioRepositorio
 import com.example.proyecto_kotlin.modelos.Usuario
 
 class RegistrarActivity : AppCompatActivity() {
