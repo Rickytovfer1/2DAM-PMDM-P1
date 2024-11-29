@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.proyecto_kotlin.database.UsuarioRepository
+import com.example.proyecto_kotlin.database.UsuarioRepositorio
 import com.example.proyecto_kotlin.modelos.Usuario
 
 class RegistrarActivity : AppCompatActivity() {
@@ -24,7 +24,7 @@ class RegistrarActivity : AppCompatActivity() {
         val yaTengoCuenta = findViewById<TextView>(R.id.tengoCuenta)
         val btnGuardar = findViewById<Button>(R.id.botonRegistrar)
 
-        val usuarioRepository = UsuarioRepository(this)
+        val usuarioRepositorio = UsuarioRepositorio(this)
 
         btnGuardar.setOnClickListener {
             val nombre = inputNombre.text.toString()
@@ -57,7 +57,7 @@ class RegistrarActivity : AppCompatActivity() {
             }
             builder.setPositiveButton("Aceptar") { _, _ ->
                 val notificacionesHabilitadas = seleccion == 0
-                guardarUsuario(usuarioRepository, nombre, apellidos, email, contrasena, notificacionesHabilitadas)
+                guardarUsuario(usuarioRepositorio, nombre, apellidos, email, contrasena, notificacionesHabilitadas)
             }
             builder.setNegativeButton("Cancelar") { dialog, _ ->
                 dialog.dismiss()
@@ -73,7 +73,7 @@ class RegistrarActivity : AppCompatActivity() {
     }
 
     fun guardarUsuario(
-        usuarioRepository: UsuarioRepository,
+        usuarioRepositorio: UsuarioRepositorio,
         nombre: String,
         apellidos: String,
         email: String,
@@ -88,7 +88,7 @@ class RegistrarActivity : AppCompatActivity() {
             notificaciones = notificaciones,
         )
 
-        val id = usuarioRepository.insertarUsuario(usuario)
+        val id = usuarioRepositorio.insertarUsuario(usuario)
         if (id != -1L) {
             Toast.makeText(this, "Usuario guardado con éxito (ID: $id)", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, PrincipalActivity::class.java)

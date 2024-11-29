@@ -7,7 +7,7 @@ import com.example.proyecto_kotlin.BBDD.Sql
 import com.example.proyecto_kotlin.modelos.Nota
 import com.example.proyecto_kotlin.modelos.Usuario
 
-class NotaRepository(context: Context) {
+class NotaRepositorio(context: Context) {
 
     private val dbsql = Sql(context)
 

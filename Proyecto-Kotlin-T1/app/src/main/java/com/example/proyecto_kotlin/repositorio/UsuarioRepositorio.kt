@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import com.example.proyecto_kotlin.BBDD.Sql
 import com.example.proyecto_kotlin.modelos.Usuario
 
-class UsuarioRepository(context: Context) {
+class UsuarioRepositorio(context: Context) {
 
     private val dbsql = Sql(context)
 
