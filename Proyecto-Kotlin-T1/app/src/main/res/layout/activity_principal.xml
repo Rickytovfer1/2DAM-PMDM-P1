@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PrincipalActivity"
+    android:background="@color/primario">
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/fotoAjustes"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15" />
+    <ImageButton
+        android:id="@+id/botonCerrarSesion"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:backgroundTint="@color/primario"
+        android:contentDescription="@string/botonCerrarSesion"
+        android:src="@mipmap/cerrar_sesion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/botonNotas"
+        android:layout_width="254dp"
+        android:layout_height="80dp"
+        android:textSize="25sp"
+        android:backgroundTint="@color/secundario"
+        android:text="@string/botonIrANotas"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/botonAjustes"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:backgroundTint="@color/secundario"
+        android:contentDescription="@string/botonIrAAjustes"
+        android:src="@mipmap/ajustes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.60"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/botonCalendario"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:backgroundTint="@color/secundario"
+        android:contentDescription="@string/botonIrACalendario"
+        android:src="@mipmap/calendario"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.60"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
