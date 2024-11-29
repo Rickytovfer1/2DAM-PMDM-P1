@@ -3,15 +3,15 @@ package com.example.proyecto_kotlin.database
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import com.example.proyecto_kotlin.BBDD.sql
-import com.example.proyecto_kotlin.modelos.usuario
+import com.example.proyecto_kotlin.BBDD.Sql
+import com.example.proyecto_kotlin.modelos.Usuario
 
 class UsuarioRepository(context: Context) {
 
-    private val dbHelper = sql(context)
+    private val dbsql = Sql(context)
 
-    fun insertarUsuario(usuario: usuario): Long {
-        val db: SQLiteDatabase = dbHelper.writableDatabase
+    fun insertarUsuario(usuario: Usuario): Long {
+        val db: SQLiteDatabase = dbsql.writableDatabase
 
         val valores = ContentValues().apply {
             put("nombre", usuario.nombre)

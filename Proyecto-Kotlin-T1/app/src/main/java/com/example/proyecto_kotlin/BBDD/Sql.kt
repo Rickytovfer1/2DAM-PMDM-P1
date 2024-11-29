@@ -4,7 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class sql(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class Sql(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(
@@ -35,7 +35,6 @@ class sql(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DAT
             """.trimIndent()
         )
 
-        // Crear tabla eventos
         db.execSQL(
             """
             CREATE TABLE eventos (
@@ -45,6 +44,11 @@ class sql(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DAT
             );
             """.trimIndent()
         )
+    }
+
+    override fun onOpen(db: SQLiteDatabase) {
+        super.onOpen(db)
+        db.execSQL("PRAGMA foreign_keys = ON;")
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -58,4 +62,6 @@ class sql(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DAT
         private const val DATABASE_NAME = "hilo.db"
         private const val DATABASE_VERSION = 1
     }
+
+
 }

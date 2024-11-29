@@ -15,7 +15,7 @@
     <string name="botonRegistrar">Registrar</string>
     <string name="inicioSesion">Inicio Sesión</string>
     <string name="botonIniciarSesion">Iniciar sesión</string>
-    <string name="olvidarContrasena">¿Has olvidado la contraseña?</string>
+    <string name="registrarse">Registrarse</string>
     <string name="botonIrANotas">Escribe tu día …</string>
     <string name="botonIrACalendario">Botón para ir a el apartado calendario</string>
     <string name="botonIrAAjustes">Botón para ir a ajustes</string>
