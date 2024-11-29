@@ -24,6 +24,7 @@
     <string name="botonVolver">Botón para volver</string>
     <string name="botonCerrarSesion">Botón para cerrar sesión</string>
     <string name="temas">Temas:</string>
+    <string name="textTitulo">Escribe un título</string>
     <string name="textNotas">Venga escribe que es bueno compartir recuerdos!</string>
     <string name="tituloNotas">¿Cómo fue tu día?</string>
     <string name="botonDias">DD / MM / YYYY</string>

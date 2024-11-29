@@ -1,5 +1,6 @@
 package com.example.proyecto_kotlin
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -13,16 +14,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.proyecto_kotlin.modelos.Nota
-import com.example.proyecto_kotlin.modelos.Usuario
 import com.example.proyecto_kotlin.repositorio.NotaRepositorio
-import com.example.proyecto_kotlin.repositorio.UsuarioRepositorio
 import java.time.LocalDate
 
 class NotasActivity : AppCompatActivity()
 {
+    @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_notas)
@@ -33,7 +32,7 @@ class NotasActivity : AppCompatActivity()
             insets
         }
         val editTextNota = findViewById<EditText>(R.id.editTextNota)
-
+        val editTextTitulo = findViewById<EditText>(R.id.editTextTituloNota)
 
         val botonEstadistica = findViewById<ImageButton>(R.id.botonEstadistica)
         val botonMenu = findViewById<ImageButton>(R.id.botonPrincipal)
@@ -42,29 +41,52 @@ class NotasActivity : AppCompatActivity()
         val sharedPreferences = getSharedPreferences("idUsuario", MODE_PRIVATE)
         val idUsuario = sharedPreferences.getLong("id_usuario", -1L)
 
+        val sharedPreferencesNota = getSharedPreferences("nota_$idUsuario", MODE_PRIVATE)
+        val textoNotaGuardada = sharedPreferencesNota.getString("textoNota", "")
+        val tituloNotaGuardado = sharedPreferencesNota.getString("tituloNota", "")
+
+        editTextNota.setText(textoNotaGuardada)
+        editTextTitulo.setText(tituloNotaGuardado)
+
         botonGuardar.setOnClickListener {
             val textoNota = editTextNota.text.toString()
-            val tituloNota = "Nota rápida"
+            val tituloNotaTitulo = editTextTitulo.text.toString()
             val estadoNota = "regular"
             val fechaCreacion = LocalDate.now()
 
-            if (textoNota.isBlank())
-            {
+            if (textoNota.isBlank()) {
                 Toast.makeText(this, "Por favor, escribe algo en la nota", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (idUsuario == -1L)
-            {
+            if (idUsuario == -1L) {
                 Toast.makeText(this, "Error: Usuario no identificado", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            val sharedPreferencesNo = getSharedPreferences("nota_$idUsuario", MODE_PRIVATE)
+            val editor = sharedPreferencesNo.edit()
+            editor.putString("textoNota", textoNota)
+            editor.putString("tituloNota", tituloNotaTitulo)
+            editor.apply()
 
+
+
+            if (editTextNota.text.isNotBlank()) {
+                editTextNota.isFocusable = false
+                editTextNota.isFocusableInTouchMode = false
+                editTextNota.isEnabled = false
+            }
+
+            if (editTextTitulo.text.isNotBlank()) {
+                editTextTitulo.isFocusable = false
+                editTextTitulo.isFocusableInTouchMode = false
+                editTextTitulo.isEnabled = false
+            }
             val notaRepositorio = NotaRepositorio(this)
 
             guardarNota(
                 notaRepositorio,
-                tituloNota,
+                tituloNotaTitulo,
                 textoNota,
                 estadoNota,
                 fechaCreacion,
@@ -88,8 +110,8 @@ class NotasActivity : AppCompatActivity()
         texto: String,
         estado: String,
         fechaCreacion: LocalDate,
-        idUsuario: Long
-    ) {
+        idUsuario: Long) {
+
         val nota = Nota(
             titulo = titulo,
             texto = texto,

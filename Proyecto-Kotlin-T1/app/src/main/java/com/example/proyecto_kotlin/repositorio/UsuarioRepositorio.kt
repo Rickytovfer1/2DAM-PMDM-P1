@@ -2,6 +2,7 @@ package com.example.proyecto_kotlin.repositorio
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.example.proyecto_kotlin.BBDD.Sql
 import com.example.proyecto_kotlin.modelos.Usuario
@@ -25,5 +26,29 @@ class UsuarioRepositorio(context: Context) {
         val id = db.insert("usuario", null, valores)
         db.close()
         return id
+    }
+
+    fun verificarUsuario(email: String, contrasena: String): Long {
+        val db: SQLiteDatabase = dbsql.readableDatabase
+        var idUsuario: Long = -1
+
+        try {
+            val cursor: Cursor = db.rawQuery(
+                "SELECT id FROM usuario WHERE email = ? AND contrasena = ?",
+                arrayOf(email, contrasena)
+            )
+
+            if (cursor.moveToFirst()) {
+                idUsuario = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
+            }
+
+            cursor.close()
+        } catch (e: Exception) {
+            println("Error")
+        } finally {
+            db.close()
+        }
+
+        return idUsuario
     }
 }
