@@ -43,5 +43,6 @@
     <string name="botonBueno">He tenido un gran dia</string>
     <string name="botonGuardar">Guardar</string>
     <string name="progreso">Progreso Mesual</string>
-
+    <string name="guardar">Guardar</string>
+    <string name="modificarNota">Modificar</string>
 </resources>

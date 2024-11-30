@@ -34,6 +34,10 @@ class NotasActivity : AppCompatActivity()
         val editTextNota = findViewById<EditText>(R.id.editTextNota)
         val editTextTitulo = findViewById<EditText>(R.id.editTextTituloNota)
 
+        val botonMal = findViewById<ImageButton>(R.id.botonMal)
+        val botonRegular = findViewById<ImageButton>(R.id.botonRegular)
+        val botonBien = findViewById<ImageButton>(R.id.botonBien)
+
         val botonEstadistica = findViewById<ImageButton>(R.id.botonEstadistica)
         val botonMenu = findViewById<ImageButton>(R.id.botonPrincipal)
         val botonGuardar = findViewById<Button>(R.id.botonGuardar)
@@ -45,14 +49,70 @@ class NotasActivity : AppCompatActivity()
         val textoNotaGuardada = sharedPreferencesNota.getString("textoNota", "")
         val tituloNotaGuardado = sharedPreferencesNota.getString("tituloNota", "")
 
+        val notaRepositorio = NotaRepositorio(this)
+
         editTextNota.setText(textoNotaGuardada)
         editTextTitulo.setText(tituloNotaGuardado)
+
+        val fechaActual = LocalDate.now()
+        val notaExistente = notaRepositorio.obtenerNotaPorFecha(idUsuario, fechaActual)
+
+        val sharedPreferencesFecha = getSharedPreferences("ultimaFecha_$idUsuario", MODE_PRIVATE)
+        val ultimaFechaGuardada = sharedPreferencesFecha.getString("ultimaFecha", null)
+        val fechaActualString = LocalDate.now().toString()
+
+        var estadoNota = ""
+
+        if (ultimaFechaGuardada != fechaActualString) {
+
+            botonGuardar.text = getString(R.string.guardar)
+            editTextTitulo.text.clear()
+            editTextNota.text.clear()
+
+            val editorFecha = sharedPreferencesFecha.edit()
+            editorFecha.putString("ultimaFecha", fechaActualString)
+            editorFecha.apply()
+        } else {
+
+            if (notaExistente != null) {
+                botonGuardar.text = getString(R.string.modificarNota)
+                editTextTitulo.setText(notaExistente.titulo)
+                editTextNota.setText(notaExistente.texto)
+            } else {
+                botonGuardar.text = getString(R.string.guardar)
+            }
+        }
+
+        botonMal.setOnClickListener {
+            estadoNota = "mal"
+            botonMal.isEnabled = false
+            botonRegular.isEnabled = false
+            botonBien.isEnabled = false
+        }
+
+        botonRegular.setOnClickListener {
+            estadoNota = "regular"
+            botonMal.isEnabled = false
+            botonRegular.isEnabled = false
+            botonBien.isEnabled = false
+        }
+
+        botonBien.setOnClickListener {
+            estadoNota = "bien"
+            botonMal.isEnabled = false
+            botonRegular.isEnabled = false
+            botonBien.isEnabled = false
+        }
 
         botonGuardar.setOnClickListener {
             val textoNota = editTextNota.text.toString()
             val tituloNotaTitulo = editTextTitulo.text.toString()
-            val estadoNota = "regular"
             val fechaCreacion = LocalDate.now()
+
+            if (estadoNota == "") {
+                Toast.makeText(this, "Por favor, selecciona un estado para la nota", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             if (textoNota.isBlank()) {
                 Toast.makeText(this, "Por favor, escribe algo en la nota", Toast.LENGTH_SHORT).show()
@@ -82,9 +142,8 @@ class NotasActivity : AppCompatActivity()
                 editTextTitulo.isFocusableInTouchMode = false
                 editTextTitulo.isEnabled = false
             }
-            val notaRepositorio = NotaRepositorio(this)
 
-            guardarNota(
+            guardarOModificar(
                 notaRepositorio,
                 tituloNotaTitulo,
                 textoNota,
@@ -92,6 +151,14 @@ class NotasActivity : AppCompatActivity()
                 fechaCreacion,
                 idUsuario
             )
+
+            botonGuardar.text = getString(R.string.modificarNota)
+
+            botonGuardar.isEnabled = false
+
+            val editorFecha = sharedPreferencesFecha.edit()
+            editorFecha.putString("ultimaFecha", fechaActualString)
+            editorFecha.apply()
         }
 
         botonMenu.setOnClickListener {
@@ -104,29 +171,33 @@ class NotasActivity : AppCompatActivity()
             startActivity(intent)
         }
     }
-    fun guardarNota(
+
+    fun guardarOModificar(
         notaRepositorio: NotaRepositorio,
         titulo: String,
         texto: String,
         estado: String,
         fechaCreacion: LocalDate,
         idUsuario: Long) {
+        val notaYaExiste = notaRepositorio.modificarNota(idUsuario, titulo, texto, fechaCreacion, estado)
 
-        val nota = Nota(
-            titulo = titulo,
-            texto = texto,
-            estado = estado,
-            fechaCreacion = fechaCreacion,
-            idUsuario = idUsuario,
-        )
-
-        val idNota = notaRepositorio.insertarNota(nota)
-        if (idNota != -1L) {
-            Toast.makeText(this, "Nota guardada con éxito (ID: $idNota)", Toast.LENGTH_SHORT).show()
+        if (notaYaExiste) {
+            Toast.makeText(this, "Nota actualizada con éxito", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(this, "Error al guardar la nota", Toast.LENGTH_SHORT).show()
+            val nota = Nota(
+                titulo = titulo,
+                texto = texto,
+                estado = estado,
+                fechaCreacion = fechaCreacion,
+                idUsuario = idUsuario
+            )
+
+            val idNota = notaRepositorio.insertarNota(nota)
+            if (idNota != -1L) {
+                Toast.makeText(this, "Nota guardada con éxito (ID: $idNota)", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Error al guardar la nota", Toast.LENGTH_SHORT).show()
+            }
         }
-
-
     }
 }
