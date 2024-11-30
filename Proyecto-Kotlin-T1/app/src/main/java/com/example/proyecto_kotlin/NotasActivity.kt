@@ -100,7 +100,7 @@ class NotasActivity : AppCompatActivity()
         }
 
         botonEstadistica.setOnClickListener {
-            val intent = Intent(this, ContadorMain::class.java)
+            val intent = Intent(this, ContadorActivity::class.java)
             startActivity(intent)
         }
     }
