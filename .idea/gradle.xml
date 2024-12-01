@@ -4,12 +4,12 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/2DAM-PMDM-P1" />
-        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Proyecto-Kotlin-T1" />
+        <option name="gradleJvm" value="jbr-17" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/2DAM-PMDM-P1" />
-            <option value="$PROJECT_DIR$/2DAM-PMDM-P1/app" />
+            <option value="$PROJECT_DIR$/Proyecto-Kotlin-T1" />
+            <option value="$PROJECT_DIR$/Proyecto-Kotlin-T1/app" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

@@ -45,22 +45,36 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
         app:layout_constraintHorizontal_bias="0.8"/>
-
     <EditText
-        android:id="@+id/editTextNota"
-        android:layout_width="210dp"
-        android:layout_height="250dp"
-        android:gravity="center"
-        android:hint="@string/textNotas"
-        android:textColorHint="@color/white"
-        android:textSize="25sp"
-        android:textColor="@color/white"
+        android:id="@+id/editTextTituloNota"
+        android:layout_width="213dp"
+        android:layout_height="80dp"
         android:fontFamily="@font/fuente_titulo"
+        android:gravity="center"
+        android:hint="@string/textTitulo"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"/>
+        app:layout_constraintVertical_bias="0.40" />
+    <EditText
+        android:id="@+id/editTextNota"
+        android:layout_width="213dp"
+        android:layout_height="154dp"
+        android:fontFamily="@font/fuente_titulo"
+        android:gravity="center"
+        android:hint="@string/textNotas"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.58" />
 
     <ImageButton
         android:id="@+id/botonMal"
