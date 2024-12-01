@@ -6,6 +6,8 @@
     <string name="editTextApellidos">Introduza los apellidos</string>
     <string name="editTextContrasena">Introduza la contraseña</string>
     <string name="editTextRepetir">Por favor, introduce de nuevo la contraseña</string>
+    <string name="changeTextEmail">Introduza el email nuevo</string>
+    <string name="changeTextContrasena">Introduza la contraseña nueva</string>
     <string name="email">Email: </string>
     <string name="nombre">Nombre: </string>
     <string name="apellidos">Apellidos: </string>

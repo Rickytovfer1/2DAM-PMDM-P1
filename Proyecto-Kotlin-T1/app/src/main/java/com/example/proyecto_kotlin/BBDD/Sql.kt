@@ -1,5 +1,6 @@
 package com.example.proyecto_kotlin.BBDD
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -58,10 +59,44 @@ class Sql(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DAT
         onCreate(db)
     }
 
+    fun updateEmail(userId: Int, newEmail: String): Boolean {
+        val db = this.writableDatabase
+        val contentValues = ContentValues().apply {
+            put("email", newEmail)
+        }
+        val result = db.update("usuario", contentValues, "id = ?", arrayOf(userId.toString()))
+        return result > 0
+    }
+
+    fun updatePassword(userId: Int, newPassword: String): Boolean {
+        val db = this.writableDatabase
+        val contentValues = ContentValues().apply {
+            put("contrasena", newPassword)
+        }
+        val result = db.update("usuario", contentValues, "id = ?", arrayOf(userId.toString()))
+        return result > 0
+    }
+
+    fun updateThemeColor(userId: Int, newColor: String): Boolean {
+        val db = this.writableDatabase
+        val contentValues = ContentValues().apply {
+            put("color_app", newColor)
+        }
+        val result = db.update("usuario", contentValues, "id = ?", arrayOf(userId.toString()))
+        return result > 0
+    }
+
+    fun updateNotificaciones(userId: Int, notificaciones: Int): Boolean {
+        val db = this.writableDatabase
+        val contentValues = ContentValues().apply {
+            put("notificaciones", notificaciones)
+        }
+        val result = db.update("usuario", contentValues, "id = ?", arrayOf(userId.toString()))
+        return result > 0
+    }
+
     companion object {
         private const val DATABASE_NAME = "hilo.db"
         private const val DATABASE_VERSION = 1
     }
-
-
 }
