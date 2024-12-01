@@ -155,6 +155,7 @@ class Cox
 dependencies
 {
     implementation("org.postgresql:postgresql:42.2.20")
+    implementation(libs.postgresql)
 }
 */
 
