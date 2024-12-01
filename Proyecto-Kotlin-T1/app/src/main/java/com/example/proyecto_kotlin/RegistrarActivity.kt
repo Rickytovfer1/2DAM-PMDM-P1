@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.proyecto_kotlin.repositorio.UsuarioRepositorio
 import com.example.proyecto_kotlin.modelos.Usuario
 
+
+// Esto no me gusta nada.
 class RegistrarActivity : AppCompatActivity() {
 
     @SuppressLint("MissingInflatedId")
