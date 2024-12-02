@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Switch
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.proyecto_kotlin.BBDD.Sql
+import com.example.proyecto_kotlin.utiles.ColorUtiles
 
 class AjustesActivity : AppCompatActivity() {
 
@@ -31,33 +33,36 @@ class AjustesActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("ColorPreferences", MODE_PRIVATE)
 
-        val botonBlanco = findViewById<Button>(R.id.botonBlanco)
-        val botonRosa = findViewById<Button>(R.id.botonRosa)
-        val botonRojo = findViewById<Button>(R.id.botonRojo)
-        val botonVerde = findViewById<Button>(R.id.botonVerde)
+        val botonAzul = findViewById<Button>(R.id.botonAzul)
+        val botonAnaranjadoClaro = findViewById<Button>(R.id.botonAnaranjadoClaro)
+        val botonAzulClaro = findViewById<Button>(R.id.botonAzulClaro)
+        val botonPlomoClaro = findViewById<Button>(R.id.botonPlomoClaro)
+        val botonNegroClaro = findViewById<Button>(R.id.botonNegroClaro)
         val botonEstadistica = findViewById<ImageButton>(R.id.botonEstadistica)
         val botonMenu = findViewById<ImageButton>(R.id.botonPrincipal)
+        val switchNotificaciones = findViewById<Switch>(R.id.switchNotificaciones)
 
         val layout = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.main)
         val emailField = findViewById<EditText>(R.id.editTextEmail)
         val passwordField = findViewById<EditText>(R.id.editTextContrasena)
 
+/*        val colorGuardado = ColorUtiles().obtenerColorGuardado(this)
+        layout.setBackgroundColor(colorGuardado)*/
 
-        val colorGuardado = sharedPreferences.getInt("color", Color.WHITE)
-        layout.setBackgroundColor(colorGuardado)
-
-
-        botonBlanco.setOnClickListener {
-            actualizarColor(Color.WHITE, sharedPreferences, layout)
+        botonAzul.setOnClickListener {
+            actualizarColor(Color.parseColor("#3A7CA5"), sharedPreferences, layout)
         }
-        botonRosa.setOnClickListener {
-            actualizarColor(Color.MAGENTA, sharedPreferences, layout)
+        botonNegroClaro.setOnClickListener {
+            actualizarColor(Color.parseColor("#4A4A4A"), sharedPreferences, layout)
         }
-        botonRojo.setOnClickListener {
-            actualizarColor(Color.RED, sharedPreferences, layout)
+        botonAnaranjadoClaro.setOnClickListener {
+            actualizarColor(Color.parseColor("#F4A261"), sharedPreferences, layout)
         }
-        botonVerde.setOnClickListener {
-            actualizarColor(Color.GREEN, sharedPreferences, layout)
+        botonAzulClaro.setOnClickListener {
+            actualizarColor(Color.parseColor("#A8DADC"), sharedPreferences, layout)
+        }
+        botonPlomoClaro.setOnClickListener {
+            actualizarColor(Color.parseColor("#008F11"), sharedPreferences, layout)
         }
 
         botonMenu.setOnClickListener {
@@ -70,10 +75,27 @@ class AjustesActivity : AppCompatActivity() {
         findViewById<Button>(R.id.botonGuardar).setOnClickListener {
             guardarCambios(emailField, passwordField, sharedPreferences)
         }
+
+        switchNotificaciones.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                habilitarNotificaciones()
+            } else {
+                deshabilitarNotificaciones()
+            }
+            actualizarNotificacionesEnBD(isChecked)
+        }
+
+        // Retrieve and set email and password
+        val db = Sql(this)
+        val user = db.getUserById(userId)
+        if (user != null) {
+            emailField.setText(user.email)
+            passwordField.setText(user.contrasena)
+            passwordField.transformationMethod = android.text.method.PasswordTransformationMethod.getInstance()
+        }
     }
 
     private fun obtenerUsuarioLogueado(): Int {
-
         val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
         return sharedPreferences.getInt("userId", -1) // -1 si no se encuentra el ID
     }
@@ -124,6 +146,26 @@ class AjustesActivity : AppCompatActivity() {
 
         if (!cambiosRealizados) {
             Toast.makeText(this, "No se realizaron cambios", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun habilitarNotificaciones() {
+        // Lógica para habilitar todas las notificaciones
+        Toast.makeText(this, "Notificaciones habilitadas", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun deshabilitarNotificaciones() {
+        // Lógica para deshabilitar todas las notificaciones
+        Toast.makeText(this, "Notificaciones deshabilitadas", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun actualizarNotificacionesEnBD(habilitar: Boolean) {
+        val db = Sql(this)
+        val notificaciones = if (habilitar) 1 else 0
+        if (db.updateNotificaciones(userId, notificaciones)) {
+            Toast.makeText(this, "Configuración de notificaciones actualizada", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Error al actualizar configuración de notificaciones", Toast.LENGTH_SHORT).show()
         }
     }
 }
