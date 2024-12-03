@@ -9,8 +9,8 @@
     android:background="@color/primario">
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:contentDescription="@string/fotoAjustes"
         android:src="@drawable/ajustes"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,7 +31,7 @@
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <EditText
         android:id="@+id/editTextEmail"
@@ -44,7 +44,7 @@
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintVertical_bias="0.35"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -58,10 +58,35 @@
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55" />
+        app:layout_constraintVertical_bias="0.44" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fuente_titulo"
+        android:text="@string/mostrarNotis"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.61" />
+
+    <Switch
+        android:id="@+id/mostrarNotificaciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.61"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <EditText
-        android:id="@+id/editTextContrasena"
+        android:id="@+id/editTextContraseña"
         android:layout_width="355dp"
         android:layout_height="50dp"
         android:background="@drawable/edittext_fondo"
@@ -70,7 +95,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintVertical_bias="0.5"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -81,95 +106,71 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.082"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.739" />
+        app:layout_constraintVertical_bias="0.7" />
 
     <Button
-        android:id="@+id/botonNegroClaro"
+        android:id="@+id/botonGuardarCambios"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/secundario"
+        android:hint="@string/botonGuardar"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9"/>
+
+    <Button
+        android:id="@+id/botonBlanco"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/dark_grey"
+        android:backgroundTint="@color/primario"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.881"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.822" />
+        app:layout_constraintVertical_bias="0.8" />
 
     <Button
-        android:id="@+id/botonAzulClaro"
+        android:id="@+id/botonRosa"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/light_blue"
+        android:backgroundTint="@color/rosa_claro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.28"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.822" />
+        app:layout_constraintVertical_bias="0.8" />
 
     <Button
-        android:id="@+id/botonAnaranjadoClaro"
+        android:id="@+id/botonRojo"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/yellow"
+        android:backgroundTint="@color/naranja_claro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.822" />
+        app:layout_constraintVertical_bias="0.8" />
 
     <Button
-        android:id="@+id/botonPlomoClaro"
+        android:id="@+id/botonVerde"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/light_grey"
+        android:backgroundTint="@color/verde_claro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.681"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.822" />
-
-    <Button
-        android:id="@+id/botonAzul"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.08"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.822" />
-
-    <Button
-        android:id="@+id/botonGuardar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Guardar cambios"
-        android:backgroundTint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.912" />
-
-    <Switch
-        android:id="@+id/switchNotificaciones"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Habilitar Notificaciones"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.685" />
+        app:layout_constraintVertical_bias="0.8" />
 
     <LinearLayout
         android:id="@+id/menuInferior"
@@ -190,6 +191,7 @@
             android:src="@mipmap/estadistica"
             android:backgroundTint="@color/secundario"
             android:scaleType="centerInside" />
+
 
         <ImageButton
             android:id="@+id/botonPrincipal"
