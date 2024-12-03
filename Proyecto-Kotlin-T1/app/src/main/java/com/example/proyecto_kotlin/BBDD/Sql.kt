@@ -16,7 +16,7 @@ class Sql(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DAT
                 email TEXT NOT NULL UNIQUE,
                 contrasena TEXT NOT NULL,
                 notificaciones INTEGER,
-                color_app TEXT DEFAULT 'azul' CHECK (color_app IN ('blanco', 'rosa', 'naranja', 'verde', 'azul'))
+                color_app TEXT DEFAULT 'azul' CHECK (color_app IN ('azul', 'rosa', 'verde', 'naranja'))
             );
             """.trimIndent()
         )

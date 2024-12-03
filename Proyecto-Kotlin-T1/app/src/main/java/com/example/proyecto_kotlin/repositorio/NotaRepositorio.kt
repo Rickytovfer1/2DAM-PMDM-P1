@@ -51,6 +51,7 @@ class NotaRepositorio(context: Context) {
         return fila > 0
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun obtenerNotaPorFecha(idUsuario: Long, fechaCreacion: LocalDate): Nota? {
         val db: SQLiteDatabase = dbsql.readableDatabase
         val cursor: Cursor = db.query(
@@ -84,5 +85,76 @@ class NotaRepositorio(context: Context) {
         return nota
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun contarNotasEstado(idUsuario: Long): Map<String, Int> {
+        val estadoContador = mutableMapOf<String, Int>()
+        val db: SQLiteDatabase = dbsql.readableDatabase
+        val mesActual = LocalDate.now().toString().substring(0, 7)
 
+        val cursor = db.rawQuery(
+            """
+            SELECT estado, COUNT(*) as cantidad
+            FROM notas
+            WHERE strftime('%Y-%m', fecha_creacion) = ? AND id_usuario = ?
+            GROUP BY estado
+            """, arrayOf(mesActual, idUsuario.toString())
+        )
+
+        while (cursor.moveToNext()) {
+            val estado = cursor.getString(cursor.getColumnIndexOrThrow("estado"))
+            val cantidad = cursor.getInt(cursor.getColumnIndexOrThrow("cantidad"))
+            estadoContador[estado] = cantidad
+        }
+
+        cursor.close()
+        db.close()
+
+        return estadoContador
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun obtenerNotaFecha(idUsuario: Long, fechaCreacion: LocalDate): Nota? {
+        val db: SQLiteDatabase = dbsql.readableDatabase
+
+        val fechaCreacionStr = fechaCreacion.toString()
+
+        val cursor: Cursor = db.query(
+            "notas",
+            arrayOf("id", "titulo", "texto", "estado", "fecha_creacion", "id_usuario"),
+            "id_usuario = ? AND fecha_creacion = ?",
+            arrayOf(idUsuario.toString(), fechaCreacionStr),
+            null,
+            null,
+            null
+        )
+
+        if (cursor != null && cursor.moveToFirst()) {
+            val idIndex = cursor.getColumnIndex("id")
+            val tituloIndex = cursor.getColumnIndex("titulo")
+            val textoIndex = cursor.getColumnIndex("texto")
+            val estadoIndex = cursor.getColumnIndex("estado")
+            val fechaCreacionIndex = cursor.getColumnIndex("fecha_creacion")
+
+            if (idIndex == -1 || tituloIndex == -1 || textoIndex == -1 || estadoIndex == -1 || fechaCreacionIndex == -1) {
+                cursor.close()
+                db.close()
+                return null
+            }
+
+            val id = cursor.getLong(idIndex)
+            val titulo = cursor.getString(tituloIndex)
+            val texto = cursor.getString(textoIndex)
+            val estado = cursor.getString(estadoIndex)
+            val fecha = LocalDate.parse(cursor.getString(fechaCreacionIndex))
+
+            cursor.close()
+            db.close()
+
+            return Nota(id, titulo, texto, estado, fecha, idUsuario)
+        }
+
+        cursor.close()
+        db.close()
+        return null
+    }
 }
