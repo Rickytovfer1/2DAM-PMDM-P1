@@ -3,10 +3,12 @@ package com.example.proyecto_kotlin.BBDD
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 
 class Sql(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {
+        Log.d("Sql", "Creating database tables")
         db.execSQL(
             """
             CREATE TABLE usuario (
@@ -62,6 +64,4 @@ class Sql(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DAT
         private const val DATABASE_NAME = "hilo.db"
         private const val DATABASE_VERSION = 1
     }
-
-
 }
