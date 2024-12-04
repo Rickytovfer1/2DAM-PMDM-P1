@@ -26,13 +26,11 @@ class MainActivity : AppCompatActivity() {
         }
         val repositorio = UsuarioRepositorio(this)
 
-
         val botonIniciar = findViewById<Button>(R.id.botonIniciarSesionn)
         val registrarse = findViewById<TextView>(R.id.registrarse)
 
         val editTextEmail = findViewById<EditText>(R.id.editTextEmailRegistrado)
         val editTextContrasena = findViewById<EditText>(R.id.editTextContrasenaRegistrada)
-
 
         botonIniciar.setOnClickListener {
             val usuarioValido = repositorio.verificarUsuario(editTextEmail.text.toString(),
@@ -45,11 +43,12 @@ class MainActivity : AppCompatActivity() {
                 editor.apply()
 
                 val intent = Intent(this, PrincipalActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
+                finish()
             } else {
                 Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
             }
-
         }
 
         registrarse.setOnClickListener {

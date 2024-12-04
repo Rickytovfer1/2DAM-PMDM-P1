@@ -1,9 +1,11 @@
 package com.example.proyecto_kotlin
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.InputType
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -41,9 +43,46 @@ class AjustesActivity : AppCompatActivity() {
 
         val botonEstadistica = findViewById<ImageButton>(R.id.botonEstadistica)
         val botonMenu = findViewById<ImageButton>(R.id.botonPrincipal)
+        val botonVolver: ImageButton = findViewById(R.id.botonVolver)
 
         val switchNotificaciones = findViewById<Switch>(R.id.mostrarNotificaciones)
 
+        val botonEliminarUsuario: Button = findViewById(R.id.eliminarUsuario)
+
+        botonEliminarUsuario.setOnClickListener {
+            AlertDialog.Builder(this).apply {
+                setTitle("Confirmación")
+                setMessage("¿Estás seguro de que deseas eliminar tu cuenta?")
+                setPositiveButton("Sí") { _, _ ->
+                    val idUsuario = sharedPreferences.getLong("id_usuario", -1)
+                    AlertDialog.Builder(this@AjustesActivity).apply {
+                        setTitle("Confirmación")
+                        setMessage("Pon tu contraseña")
+                        val campoContrasena = EditText(this@AjustesActivity).apply { inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD }
+                        setView(campoContrasena)
+                        setPositiveButton("Aceptar") { _, _ ->
+                            val usuarioValido = repositorioUsuario.verificarUsuario(repositorioUsuario.obtenerEmail(idUsuarioInt).toString(), campoContrasena.text.toString())
+                            if (usuarioValido != -1L) {
+                                val eliminado = repositorioUsuario.eliminarUsuario(idUsuario)
+                                if (eliminado) {
+                                    Toast.makeText(this@AjustesActivity, "Usuario eliminado.", Toast.LENGTH_SHORT).show()
+                                    val intent = Intent(this@AjustesActivity, MainActivity::class.java)
+                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    startActivity(intent)
+                                } else {
+                                    Toast.makeText(this@AjustesActivity, "Error al eliminar el usuario.", Toast.LENGTH_SHORT).show()
+                                }
+                            } else {
+                                Toast.makeText(this@AjustesActivity, "Error: Contraseña incorrecta.", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                        setNegativeButton("Cancelar", null)
+                    }.show()
+                }
+                setNegativeButton("No", null)
+            }.show()
+
+        }
 
         val correo = repositorioUsuario.obtenerEmail(idUsuarioInt)
 
@@ -53,8 +92,7 @@ class AjustesActivity : AppCompatActivity() {
 
         if (notificaciones == 1) {
             switchNotificaciones.isChecked = true
-        }
-        else {
+        } else {
             switchNotificaciones.isChecked = false
         }
         switchNotificaciones.setOnCheckedChangeListener { _, marcado ->
@@ -110,7 +148,7 @@ class AjustesActivity : AppCompatActivity() {
             R.id.botonBlanco to "azul",
             R.id.botonRosa to "rosa",
             R.id.botonRojo to "naranja",
-            R.id.botonVerde to "verde"
+            R.id.botonVerde to "verde",
         )
 
         botonesColores.forEach { (botonId, color) ->
@@ -119,12 +157,22 @@ class AjustesActivity : AppCompatActivity() {
                 if (actualizado) {
                     Toast.makeText(this, "Color actualizado a $color.", Toast.LENGTH_SHORT).show()
                     repositorioUsuario.aplicarColorFondo(idUsuarioInt, layoutPrincipal)
+                    setResult(RESULT_OK)
                 } else {
                     Toast.makeText(this, "Error al actualizar el color.", Toast.LENGTH_SHORT).show()
                 }
             }
         }
-
+        findViewById<ImageButton>(R.id.botonNavidad).setOnClickListener {
+            val actualizado = repositorioUsuario.actualizarColorApp(idUsuarioInt, "navidad")
+            if (actualizado) {
+                Toast.makeText(this, "Color actualizado a tema navideño.", Toast.LENGTH_SHORT).show()
+                repositorioUsuario.aplicarColorFondo(idUsuarioInt, layoutPrincipal)
+                setResult(RESULT_OK)
+            } else {
+                Toast.makeText(this, "Error al actualizar el color.", Toast.LENGTH_SHORT).show()
+            }
+        }
         botonMenu.setOnClickListener {
             val intent = Intent(this, PrincipalActivity::class.java)
             startActivity(intent)
@@ -133,6 +181,11 @@ class AjustesActivity : AppCompatActivity() {
         botonEstadistica.setOnClickListener {
             val intent = Intent(this, ContadorActivity::class.java)
             startActivity(intent)
+        }
+
+        botonVolver.setOnClickListener {
+            setResult(RESULT_OK)
+            finish()
         }
     }
 }
