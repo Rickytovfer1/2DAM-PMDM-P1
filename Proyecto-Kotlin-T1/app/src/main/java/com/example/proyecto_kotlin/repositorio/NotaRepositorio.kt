@@ -157,4 +157,11 @@ class NotaRepositorio(context: Context) {
         db.close()
         return null
     }
+
+    fun eliminarNota(id: Long): Boolean {
+        val db: SQLiteDatabase = dbsql.writableDatabase
+        val filasAfectadas = db.delete("notas", "id = ?", arrayOf(id.toString()))
+        db.close()
+        return filasAfectadas > 0
+    }
 }

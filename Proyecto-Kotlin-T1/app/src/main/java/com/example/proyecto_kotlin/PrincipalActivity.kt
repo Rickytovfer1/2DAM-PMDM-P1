@@ -15,6 +15,7 @@ import com.example.proyecto_kotlin.repositorio.UsuarioRepositorio
 class PrincipalActivity : AppCompatActivity() {
 
     private val usuarioRepositorio: UsuarioRepositorio by lazy { UsuarioRepositorio(this) }
+    private val REQUEST_CODE_AJUSTES = 1
 
     @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +43,6 @@ class PrincipalActivity : AppCompatActivity() {
             }
         }
 
-
         botonIrNotas.setOnClickListener {
             val intent = Intent(this, NotasActivity::class.java)
             startActivity(intent)
@@ -55,12 +55,32 @@ class PrincipalActivity : AppCompatActivity() {
 
         botonIrAjuste.setOnClickListener {
             val intent = Intent(this, AjustesActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, REQUEST_CODE_AJUSTES)
         }
 
         botonCerrarSesion.setOnClickListener {
+            val editor = sharedPreferences.edit()
+            editor.remove("id_usuario")
+            editor.apply()
+
             val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
+            finish()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_AJUSTES && resultCode == RESULT_OK) {
+            val sharedPreferences = getSharedPreferences("idUsuario", MODE_PRIVATE)
+            val idUsuario = sharedPreferences.getLong("id_usuario", -1L)
+            if (idUsuario != -1L) {
+                val layout = findViewById<ConstraintLayout>(R.id.principalActivity)
+                layout?.let {
+                    usuarioRepositorio.aplicarColorFondo(idUsuario.toInt(), it)
+                }
+            }
         }
     }
 }

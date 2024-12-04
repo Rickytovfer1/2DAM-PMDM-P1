@@ -30,6 +30,13 @@ class UsuarioRepositorio(context: Context) {
         return id
     }
 
+    fun eliminarUsuario(id: Long): Boolean {
+        val db: SQLiteDatabase = dbsql.writableDatabase
+        val filasAfectadas = db.delete("usuario", "id = ?", arrayOf(id.toString()))
+        db.close()
+        return filasAfectadas > 0
+    }
+
     fun verificarUsuario(email: String, contrasena: String): Long {
         val db: SQLiteDatabase = dbsql.readableDatabase
         var idUsuario: Long = -1
@@ -184,6 +191,7 @@ class UsuarioRepositorio(context: Context) {
             "rosa" -> R.color.rosa_claro
             "verde" -> R.color.verde_claro
             "naranja" -> R.color.naranja_claro
+            "navidad" -> R.drawable.fondo_navidad
 
             else -> R.color.primario
         }

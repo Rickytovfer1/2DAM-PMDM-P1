@@ -27,6 +27,7 @@ class ContadorActivity : AppCompatActivity() {
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
         val botonMenu = findViewById<ImageButton>(R.id.botonPrincipal)
+        val botonVolver: ImageButton = findViewById(R.id.botonVolver)
 
         val mesActual = LocalDate.now().toString().substring(0, 7)
         val diasMes = when(mesActual.substring(5, 7)){
@@ -56,6 +57,10 @@ class ContadorActivity : AppCompatActivity() {
         botonMenu.setOnClickListener {
             val intent = Intent(this, PrincipalActivity::class.java)
             startActivity(intent)
+        }
+
+        botonVolver.setOnClickListener {
+            finish()
         }
     }
 

@@ -43,6 +43,7 @@ class NotasActivity : AppCompatActivity() {
 
         val botonEstadistica = findViewById<ImageButton>(R.id.botonEstadistica)
         val botonMenu = findViewById<ImageButton>(R.id.botonPrincipal)
+        val botonVolver: ImageButton = findViewById(R.id.botonVolver)
         val botonGuardar = findViewById<Button>(R.id.botonGuardar)
 
         val sharedPreferences = getSharedPreferences("idUsuario", MODE_PRIVATE)
@@ -62,11 +63,13 @@ class NotasActivity : AppCompatActivity() {
 
         val notaRepositorio = NotaRepositorio(this)
 
-        editTextNota.setText(textoNotaGuardada)
-        editTextTitulo.setText(tituloNotaGuardado)
-
         val fechaActual = LocalDate.now()
         val notaExistente = notaRepositorio.obtenerNotaPorFecha(idUsuario, fechaActual)
+
+        if (notaExistente != null) {
+            editTextNota.setText(textoNotaGuardada)
+            editTextTitulo.setText(tituloNotaGuardado)
+        }
 
         val sharedPreferencesFecha = getSharedPreferences("ultimaFecha_$idUsuario", MODE_PRIVATE)
         val ultimaFechaGuardada = sharedPreferencesFecha.getString("ultimaFecha", null)
@@ -180,6 +183,10 @@ class NotasActivity : AppCompatActivity() {
         botonEstadistica.setOnClickListener {
             val intent = Intent(this, ContadorActivity::class.java)
             startActivity(intent)
+        }
+
+        botonVolver.setOnClickListener {
+            finish()
         }
     }
 
