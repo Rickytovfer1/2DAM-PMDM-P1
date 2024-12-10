@@ -10,7 +10,7 @@ import com.example.proyecto_kotlin.repositorio.UsuarioRepositorio
 import com.example.proyecto_kotlin.modelos.Usuario
 
 
-// Esto no me gusta nada.
+// ñe.
 class RegistrarActivity : AppCompatActivity() {
 
     @SuppressLint("MissingInflatedId")
