@@ -40,8 +40,18 @@ class RegistrarActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "Por favor, introduce un email válido", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             if (contrasena != repetirContrasena) {
                 Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!contrasena.matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$"))) {
+                Toast.makeText(this, "La contraseña debe tener al menos 8 caracteres, incluyendo letras, números, mayúsculas y minúsculas", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -53,7 +63,7 @@ class RegistrarActivity : AppCompatActivity() {
             var seleccion = 0
 
             val builder = AlertDialog.Builder(this)
-            builder.setTitle("Notificaciones en la pantalla de bloqueo")
+            builder.setTitle("Mostrar notificaciones")
             builder.setSingleChoiceItems(opcionesNotificaciones, seleccion) { _, which ->
                 seleccion = which
             }
@@ -97,13 +107,11 @@ class RegistrarActivity : AppCompatActivity() {
             editor.putLong("id_usuario", id)
             editor.apply()
 
-            Toast.makeText(this, "Usuario guardado con éxito (ID: $id)", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, PrincipalActivity::class.java)
             startActivity(intent)
         } else {
-            Toast.makeText(this, "Error al guardar el usuario", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Error al registrar usuario", Toast.LENGTH_SHORT).show()
         }
-
     }
-
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kotlin-Proyecto1</string>
+    <string name="app_name">Hilo De Vida</string>
     <string name="registrar">Registrarse</string>
     <string name="editTextEmail">Introduza el email</string>
     <string name="editTextNombre">Introduza el nombre</string>
@@ -42,7 +42,10 @@
     <string name="botonMedio">He tenido un dia normal</string>
     <string name="botonBueno">He tenido un gran dia</string>
     <string name="botonGuardar">Guardar</string>
+    <string name="botonEliminar">Eliminar mi cuenta</string>
     <string name="progreso">Progreso Mesual</string>
     <string name="guardar">Guardar</string>
     <string name="modificarNota">Modificar</string>
+    <string name="mostrarNotis">Mostrar notificaciones: </string>
+    <string name="botonColorNavidad">Botón ppara el tema de Navidad</string>
 </resources>

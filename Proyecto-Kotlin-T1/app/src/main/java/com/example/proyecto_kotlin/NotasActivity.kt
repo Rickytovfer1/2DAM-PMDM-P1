@@ -11,21 +11,24 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.proyecto_kotlin.modelos.Nota
 import com.example.proyecto_kotlin.repositorio.NotaRepositorio
+import com.example.proyecto_kotlin.repositorio.UsuarioRepositorio
 import java.time.LocalDate
 
-class NotasActivity : AppCompatActivity()
-{
+class NotasActivity : AppCompatActivity() {
+    private val userRepositorio: UsuarioRepositorio by lazy { UsuarioRepositorio(this) }
+
     @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_notas)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main))
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.notasActivity))
         { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -40,22 +43,33 @@ class NotasActivity : AppCompatActivity()
 
         val botonEstadistica = findViewById<ImageButton>(R.id.botonEstadistica)
         val botonMenu = findViewById<ImageButton>(R.id.botonPrincipal)
+        val botonVolver: ImageButton = findViewById(R.id.botonVolver)
         val botonGuardar = findViewById<Button>(R.id.botonGuardar)
 
         val sharedPreferences = getSharedPreferences("idUsuario", MODE_PRIVATE)
-        val idUsuario = sharedPreferences.getLong("id_usuario", -1L)
 
+        val idUsuario = sharedPreferences.getLong("id_usuario", -1L)
         val sharedPreferencesNota = getSharedPreferences("nota_$idUsuario", MODE_PRIVATE)
-        val textoNotaGuardada = sharedPreferencesNota.getString("textoNota", "")
+
+        if (idUsuario != -1L) {
+            val layout = findViewById<ConstraintLayout>(R.id.notasActivity)
+            layout?.let {
+                userRepositorio.aplicarColorFondo(idUsuario.toInt(), it)
+            }
+        }
+
+    val textoNotaGuardada = sharedPreferencesNota.getString("textoNota", "")
         val tituloNotaGuardado = sharedPreferencesNota.getString("tituloNota", "")
 
         val notaRepositorio = NotaRepositorio(this)
 
-        editTextNota.setText(textoNotaGuardada)
-        editTextTitulo.setText(tituloNotaGuardado)
-
         val fechaActual = LocalDate.now()
         val notaExistente = notaRepositorio.obtenerNotaPorFecha(idUsuario, fechaActual)
+
+        if (notaExistente != null) {
+            editTextNota.setText(textoNotaGuardada)
+            editTextTitulo.setText(tituloNotaGuardado)
+        }
 
         val sharedPreferencesFecha = getSharedPreferences("ultimaFecha_$idUsuario", MODE_PRIVATE)
         val ultimaFechaGuardada = sharedPreferencesFecha.getString("ultimaFecha", null)
@@ -167,8 +181,12 @@ class NotasActivity : AppCompatActivity()
         }
 
         botonEstadistica.setOnClickListener {
-            val intent = Intent(this, ContadorMain::class.java)
+            val intent = Intent(this, ContadorActivity::class.java)
             startActivity(intent)
+        }
+
+        botonVolver.setOnClickListener {
+            finish()
         }
     }
 
@@ -182,7 +200,7 @@ class NotasActivity : AppCompatActivity()
         val notaYaExiste = notaRepositorio.modificarNota(idUsuario, titulo, texto, fechaCreacion, estado)
 
         if (notaYaExiste) {
-            Toast.makeText(this, "Nota actualizada con éxito", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Nota actualizada correctamente", Toast.LENGTH_SHORT).show()
         } else {
             val nota = Nota(
                 titulo = titulo,
@@ -194,7 +212,7 @@ class NotasActivity : AppCompatActivity()
 
             val idNota = notaRepositorio.insertarNota(nota)
             if (idNota != -1L) {
-                Toast.makeText(this, "Nota guardada con éxito (ID: $idNota)", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Nota guardada correctamente", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "Error al guardar la nota", Toast.LENGTH_SHORT).show()
             }
